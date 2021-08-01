@@ -101,19 +101,19 @@
                     <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/adrenalin"
-                            android:onClick="adrenalinApplied"
-                            android:backgroundTint="@color/md_pink_100"
-                            android:textColor="@color/md_black_1000"
+                            android:id="@+id/amiodaron"
+                            android:onClick="amiodaronApplied"
+                            android:layout_marginRight="5pt"
+                            android:backgroundTint="@color/md_blue_400"
+                            android:textColor="@color/md_red_400"
                             android:visibility="invisible"/>
                     <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/amiodaron"
-                            android:onClick="amiodaronApplied"
-                            android:layout_marginLeft="5pt"
-                            android:backgroundTint="@color/md_blue_400"
-                            android:textColor="@color/md_red_400"
+                            android:id="@+id/adrenalin"
+                            android:onClick="adrenalinApplied"
+                            android:backgroundTint="@color/md_pink_100"
+                            android:textColor="@color/md_black_1000"
                             android:visibility="invisible"/>
                 </LinearLayout>
             </LinearLayout>

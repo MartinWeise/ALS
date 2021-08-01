@@ -21,7 +21,7 @@ import kotlin.concurrent.fixedRateTimer
 
 class AlsActivity : AppCompatActivity() {
 
-    private var adrenalineInterval = 5
+    private var adrenalineInterval = 4 * 60
     private var ticks = 0
     private var analyses = 0
     private var shocks = 0

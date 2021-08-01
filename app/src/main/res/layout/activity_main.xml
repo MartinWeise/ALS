@@ -14,6 +14,36 @@
             android:layout_width="match_parent">
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5pt">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Disclaimer"
+                    android:textColor="@color/md_black_1000"
+                    android:textSize="25sp"
+                    android:paddingTop="5pt"
+                    android:paddingLeft="5pt"
+                    android:paddingRight="5pt"
+                    android:layout_margin="0pt"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/md_grey_700"
+                    android:paddingLeft="5pt"
+                    android:paddingRight="5pt"
+                    android:paddingBottom="5pt"
+                    android:text="Only for trained medics!"
+                    android:textSize="18sp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/start"
             android:layout_width="wrap_content"

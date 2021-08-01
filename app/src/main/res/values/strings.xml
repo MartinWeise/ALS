@@ -5,8 +5,8 @@
     values-round/strings.xml for round devices.
     -->
     <string name="start">CPR Started</string>
-    <string name="shockable">Shock</string>
-    <string name="non_shockable">No Shock</string>
+    <string name="shockable">SHOCKABLE</string>
+    <string name="non_shockable">NON-SHOCKABLE</string>
     <string name="analyses">cycles</string>
     <!-- Kotlin -->
     <string name="analyze">Analyze!</string>
@@ -17,17 +17,17 @@
     <string name="adrenaline_short">ADRENALINE</string>
     <string name="amiodarone">Amiodarone</string>
     <string name="amiodarone_short">AMIODARONE</string>
+    <string name="amiodarone_dose_first">300mg</string>
+    <string name="amiodarone_dose_second">150mg</string>
     <string name="action_cpr">Start CPR</string>
-    <string name="title_activity_welcome">WelcomeActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="summary">Summary</string>
     <string name="action_end_cpr">CPR Finish</string>
     <string name="suggest_adrenaline">Adrenaline applied?</string>
+    <!-- Channel -->
+    <string name="channel_name">ALS CPR App</string>
+    <string name="channel_description">Receive notifications for CPR medications</string>
+    <string name="notification_title">CPR ALS Medication</string>
+    <string name="notification_adrenaline">Apply now 1mg Adrenaline.</string>
+    <string name="channel_group">ALS_CHANNEL_GROUP</string>
+    <string name="adrenaline_dose">1mg</string>
 </resources>

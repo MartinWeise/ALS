@@ -9,7 +9,9 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.text.Html
+import android.text.Spanned
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,33 +22,36 @@ import kotlin.concurrent.fixedRateTimer
 class AlsActivity : AppCompatActivity() {
 
     private var adrenalineInterval = 5
-    private var CHANNEL_ID = "CHANNEL_ALS"
     private var ticks = 0
     private var analyses = 0
     private var shocks = 0
     private var adrenaline = 0
     private var amiodarone = 0
-    private lateinit var channel: NotificationChannel
+    private var amiodaroneDose = 0
     private lateinit var timer: Timer
     private lateinit var vibrator: Vibrator
     private lateinit var cprCycles: TextView
     private lateinit var cprAlsAdrenaline: TextView
     private lateinit var cprAlsAmiodarone: TextView
+    private lateinit var adrenalineButton: Button
+    private lateinit var amiodaroneButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_als);
+        setContentView(R.layout.activity_als)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON) /* keep screen awake */
         /* make timer available */
         cprCycles = findViewById(R.id.cycles)
         cprAlsAdrenaline = findViewById(R.id.als_adrenaline)
         cprAlsAmiodarone = findViewById(R.id.als_amiodarone)
-        channel = NotificationChannel(CHANNEL_ID, "name", NotificationManager.IMPORTANCE_DEFAULT)
-        channel.description = "description"
+        /* make buttons available */
+        adrenalineButton = findViewById(R.id.adrenalin)
+        amiodaroneButton = findViewById(R.id.amiodaron)
         /* vibrator */
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         /* better labels */
-        findViewById<Button>(R.id.amiodaron).setText(Html.fromHtml(resources.getString(R.string.amiodarone_short) + "<sup>150mg</sup>"))
-        findViewById<Button>(R.id.adrenalin).setText(Html.fromHtml(resources.getString(R.string.adrenaline_short) + "<sup>1mg</sup>"))
+        adrenalineButton.text = buttonText(R.string.adrenaline_short, R.string.adrenaline_dose)
+        amiodaroneButton.text = buttonText(R.string.amiodarone_short, R.string.amiodarone_dose_first)
         /* start the counter */
         startTimer()
     }
@@ -76,6 +81,11 @@ class AlsActivity : AppCompatActivity() {
 
     fun amiodaronApplied(view: View) {
         amiodarone++
+        if (amiodarone == 1) {
+            amiodaroneDose += 300
+        } else {
+            amiodaroneDose += 150
+        }
         showALS()
     }
 
@@ -87,8 +97,12 @@ class AlsActivity : AppCompatActivity() {
         }
         runOnUiThread {
             cprCycles.text =
-                "" + shocks + " " + textShocks + " (" + analyses + " " + resources.getString(R.string.analyses) + ")"
+                "" + shocks + " " + textShocks + " (" + analyses + " " + getString(R.string.analyses) + ")"
         }
+    }
+
+    private fun buttonText(text: Int, dose: Int): Spanned {
+        return Html.fromHtml(getString(text) + "<sup>" + getString(dose) + "</sup>")
     }
 
     private fun showALS() {
@@ -100,10 +114,10 @@ class AlsActivity : AppCompatActivity() {
             cprAlsAdrenaline.visibility = View.VISIBLE
         }
         /* buttons */
-        if (shocks >= 3 && amiodarone != 3) {
+        if (shocks >= 3 && amiodarone != 2) {
             findViewById<Button>(R.id.amiodaron).visibility = View.VISIBLE
         }
-        if (amiodarone == 3) {
+        if (amiodarone == 2) {
             findViewById<Button>(R.id.amiodaron).visibility = View.INVISIBLE
         }
         if (analyses > 0 && adrenaline != 10) {
@@ -119,7 +133,8 @@ class AlsActivity : AppCompatActivity() {
             }
             if (amiodarone > 0) {
                 cprAlsAmiodarone.text =
-                    "" + amiodarone + "x " + getString(R.string.amiodarone) + " (" + (amiodarone * 150) + "mg)"
+                    "" + amiodarone + "x " + getString(R.string.amiodarone) + " (" + amiodaroneDose + "mg)"
+                amiodaroneButton.text = buttonText(R.string.amiodarone_short, R.string.amiodarone_dose_second)
             }
         }
     }
@@ -128,20 +143,6 @@ class AlsActivity : AppCompatActivity() {
         timer = fixedRateTimer(name = "CPR-Timer", initialDelay = 0, period = 1000) {
             if (ticks != 0 && ticks % adrenalineInterval == 0) {
                 vibrate()
-                val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-                notificationManager.createNotificationChannel(channel)
-                val mBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_launcher_background) // notification icon
-                    .setContentTitle("Notification!") // title for notification
-                    .setContentText("Hello word") // message for notification
-                    .setAutoCancel(true) // clear notification after click
-
-                val intent = Intent(applicationContext, AlsActivity::class.java)
-                val pi: PendingIntent =
-                    PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                mBuilder.setContentIntent(pi)
-                notificationManager.notify(1, mBuilder.build())
             }
             runOnUiThread {
                 title = formatTime(ticks)

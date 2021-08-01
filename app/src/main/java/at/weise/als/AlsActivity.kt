@@ -1,6 +1,10 @@
 package at.weise.als
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -8,19 +12,22 @@ import android.text.Html
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 
-class AlsActivity : FragmentActivity() {
+class AlsActivity : AppCompatActivity() {
 
+    private var adrenalineInterval = 5
+    private var CHANNEL_ID = "CHANNEL_ALS"
     private var ticks = 0
     private var analyses = 0
     private var shocks = 0
     private var adrenaline = 0
     private var amiodarone = 0
+    private lateinit var channel: NotificationChannel
     private lateinit var timer: Timer
-    private lateinit var cprTime: TextView
     private lateinit var vibrator: Vibrator
     private lateinit var cprCycles: TextView
     private lateinit var cprAlsAdrenaline: TextView
@@ -30,10 +37,11 @@ class AlsActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_als);
         /* make timer available */
-        cprTime = findViewById(R.id.timer)
         cprCycles = findViewById(R.id.cycles)
         cprAlsAdrenaline = findViewById(R.id.als_adrenaline)
         cprAlsAmiodarone = findViewById(R.id.als_amiodarone)
+        channel = NotificationChannel(CHANNEL_ID, "name", NotificationManager.IMPORTANCE_DEFAULT)
+        channel.description = "description"
         /* vibrator */
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         /* better labels */
@@ -78,7 +86,8 @@ class AlsActivity : FragmentActivity() {
             textShocks = getString(R.string.shock_multiple)
         }
         runOnUiThread {
-            cprCycles.text = "" + shocks + " " + textShocks + " (" + analyses + " " + resources.getString(R.string.analyses) + ")"
+            cprCycles.text =
+                "" + shocks + " " + textShocks + " (" + analyses + " " + resources.getString(R.string.analyses) + ")"
         }
     }
 
@@ -105,23 +114,39 @@ class AlsActivity : FragmentActivity() {
         }
         runOnUiThread {
             if (adrenaline > 0) {
-                cprAlsAdrenaline.text = "" + adrenaline + "x " + getString(R.string.adrenaline) + " (" + adrenaline + "mg)"
+                cprAlsAdrenaline.text =
+                    "" + adrenaline + "x " + getString(R.string.adrenaline) + " (" + adrenaline + "mg)"
             }
             if (amiodarone > 0) {
-                cprAlsAmiodarone.text = "" + amiodarone + "x " + getString(R.string.amiodarone) + " (" + (amiodarone * 150) + "mg)"
+                cprAlsAmiodarone.text =
+                    "" + amiodarone + "x " + getString(R.string.amiodarone) + " (" + (amiodarone * 150) + "mg)"
             }
         }
     }
 
     private fun startTimer() {
         timer = fixedRateTimer(name = "CPR-Timer", initialDelay = 0, period = 1000) {
-            ticks++
-            if (ticks != 0 && ticks % (60*4) == 0) {
+            if (ticks != 0 && ticks % adrenalineInterval == 0) {
                 vibrate()
+                val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(channel)
+                val mBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_launcher_background) // notification icon
+                    .setContentTitle("Notification!") // title for notification
+                    .setContentText("Hello word") // message for notification
+                    .setAutoCancel(true) // clear notification after click
+
+                val intent = Intent(applicationContext, AlsActivity::class.java)
+                val pi: PendingIntent =
+                    PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                mBuilder.setContentIntent(pi)
+                notificationManager.notify(1, mBuilder.build())
             }
             runOnUiThread {
-                cprTime.text = formatTime(ticks)
+                title = formatTime(ticks)
             }
+            ticks++
         }
     }
 

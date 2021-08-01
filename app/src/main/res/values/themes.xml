@@ -13,10 +13,4 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Medicine -->
     </style>
-    <style name="Theme.ALS.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">false</item>
-    </style>
-    <style name="Theme.ALS.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="Theme.ALS.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>

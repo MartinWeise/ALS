@@ -9,6 +9,7 @@
         tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_height="wrap_content"
             android:layout_width="match_parent">
     </com.google.android.material.appbar.AppBarLayout>
@@ -21,7 +22,7 @@
             android:onClick="startCpr"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/sym_action_call"
+            app:srcCompat="@drawable/ic_bolt"
             android:contentDescription="@string/action_cpr"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:background="@color/dark"
+        android:background="@color/md_grey_800"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".AlsActivity">
@@ -11,8 +11,7 @@
     <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:background="@color/dark">
+            android:orientation="vertical">
         <androidx.cardview.widget.CardView
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
@@ -28,11 +27,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textColor="@color/md_white_1000"
                         android:id="@+id/timer"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textColor="@color/md_white_1000"
                         android:visibility="invisible"
                         android:id="@+id/cycles"/>
                 <LinearLayout
@@ -43,7 +44,8 @@
                     <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/red_900"
+                            android:backgroundTint="@color/md_red_500"
+                            android:textColor="@color/md_black_1000"
                             android:id="@+id/shockable"
                             android:onClick="shock"
                             android:text="@string/shockable"/>
@@ -51,8 +53,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/non_shockable"
-                            android:backgroundTint="@color/lightgray"
-                            android:textColor="@color/dark"
+                            android:backgroundTint="@color/md_grey_500"
+                            android:textColor="@color/md_black_1000"
                             android:onClick="noShock"
                             android:text="@string/non_shockable"/>
                 </LinearLayout>
@@ -66,16 +68,15 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/adrenalin"
                             android:onClick="adrenalinApplied"
-                            android:backgroundTint="@color/adrenalin"
-                            android:textColor="@color/dark"
+                            android:backgroundTint="@color/md_pink_100"
+                            android:textColor="@color/md_black_1000"
                             android:visibility="invisible"/>
                     <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/amiodaron"
                             android:onClick="amiodaronApplied"
-                            android:backgroundTint="@color/amiodaron2"
-                            android:textColor="@color/amiodaron"
+                            android:background="@drawable/amiodarone"
                             android:visibility="invisible"/>
                 </LinearLayout>
                 <TextView
@@ -83,12 +84,14 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:visibility="invisible"
+                        android:textColor="?attr/colorOnPrimary"
                         android:id="@+id/als_adrenaline"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:visibility="invisible"
+                        android:textColor="?attr/colorOnPrimary"
                         android:id="@+id/als_amiodarone"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

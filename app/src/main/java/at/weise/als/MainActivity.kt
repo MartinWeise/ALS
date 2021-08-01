@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     // Start CPR
     fun startCpr(view: View) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, AlsActivity::class.java)
         startActivity(intent)
     }
 

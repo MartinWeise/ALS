@@ -2,20 +2,20 @@
     <!-- Base application theme. -->
     <style name="Theme.ALS" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/red_900</item>
-        <item name="colorPrimaryVariant">@color/red_500</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/md_indigo_700</item>
+        <item name="colorPrimaryVariant">@color/md_indigo_500</item>
+        <item name="colorOnPrimary">@color/md_white_1000</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/yellow_900</item>
-        <item name="colorSecondaryVariant">@color/yellow_500</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/md_yellow_700</item>
+        <item name="colorSecondaryVariant">@color/md_yellow_500</item>
+        <item name="colorOnSecondary">@color/md_black_1000</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <!-- Medicine -->
     </style>
     <style name="Theme.ALS.NoActionBar">
         <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <item name="windowNoTitle">false</item>
     </style>
     <style name="Theme.ALS.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="Theme.ALS.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>

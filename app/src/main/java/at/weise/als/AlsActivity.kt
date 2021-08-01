@@ -37,8 +37,8 @@ class AlsActivity : FragmentActivity() {
         /* vibrator */
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         /* better labels */
-        findViewById<Button>(R.id.amiodaron).setText(Html.fromHtml("Amio.<sup>150mg</sup>"))
-        findViewById<Button>(R.id.adrenalin).setText(Html.fromHtml("Adr.<sup>1mg</sup>"))
+        findViewById<Button>(R.id.amiodaron).setText(Html.fromHtml(resources.getString(R.string.amiodarone_short) + "<sup>150mg</sup>"))
+        findViewById<Button>(R.id.adrenalin).setText(Html.fromHtml(resources.getString(R.string.adrenaline_short) + "<sup>1mg</sup>"))
         /* start the counter */
         startTimer()
     }
@@ -78,7 +78,7 @@ class AlsActivity : FragmentActivity() {
             textShocks = getString(R.string.shock_multiple)
         }
         runOnUiThread {
-            cprCycles.text = "" + shocks + " " + textShocks + " (+" + (analyses - shocks) + ")"
+            cprCycles.text = "" + shocks + " " + textShocks + " (" + analyses + " " + resources.getString(R.string.analyses) + ")"
         }
     }
 
@@ -105,10 +105,10 @@ class AlsActivity : FragmentActivity() {
         }
         runOnUiThread {
             if (adrenaline > 0) {
-                cprAlsAdrenaline.text = "" + adrenaline + "x " + getString(R.string.adrenaline_short) + " (" + adrenaline + "mg)"
+                cprAlsAdrenaline.text = "" + adrenaline + "x " + getString(R.string.adrenaline) + " (" + adrenaline + "mg)"
             }
             if (amiodarone > 0) {
-                cprAlsAmiodarone.text = "" + amiodarone + "x " + getString(R.string.amiodarone_short) + " (" + (amiodarone * 150) + "mg)"
+                cprAlsAmiodarone.text = "" + amiodarone + "x " + getString(R.string.amiodarone) + " (" + (amiodarone * 150) + "mg)"
             }
         }
     }

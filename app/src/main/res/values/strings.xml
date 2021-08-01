@@ -7,13 +7,24 @@
     <string name="start">CPR Started</string>
     <string name="shockable">Shock</string>
     <string name="non_shockable">No Shock</string>
+    <string name="analyses">cycles</string>
     <!-- Kotlin -->
     <string name="analyze">Analyze!</string>
     <string name="shock">shock</string>
     <string name="shock_multiple">shocks</string>
     <string name="cpr">CPR</string>
     <string name="adrenaline">Adrenaline</string>
-    <string name="adrenaline_short">ADR</string>
+    <string name="adrenaline_short">ADRENALINE</string>
     <string name="amiodarone">Amiodarone</string>
-    <string name="amiodarone_short">AMIO</string>
+    <string name="amiodarone_short">AMIODARONE</string>
+    <string name="action_cpr">Start CPR</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
